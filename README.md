@@ -1,17 +1,14 @@
-[![PHP Version Require](http://poser.pugx.org/tebe/pdo/require/php)](https://packagist.org/packages/tebe/pdo)
-[![Version](http://poser.pugx.org/tebe/pdo/version)](https://packagist.org/packages/tebe/pdo)
-[![Testing tebe\pdo](https://github.com/tbreuss/pdo/actions/workflows/tests.yml/badge.svg)](https://github.com/tbreuss/pdo/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-# tebe\pdo
+# lucamanunza\extpdo
 
-Provides an extension to the native PDO along with additional functionality.
+Provides an extension to the native PDO along with additional functionality. Forked from `tebe\pdo`
 
-`tebe\pdo` is an extension of the native PDO in the style of a thin wrapper. All constants, properties and methods of the underlying PDO classes are therefore available. Code already using or typehinted to the native PDO can use `tebe\pdo` with minimal changes for the most part.
+`lucamanunza\extpdo` is an extension of the native PDO in the style of a thin wrapper. All constants, properties and methods of the underlying PDO classes are therefore available. Code already using or typehinted to the native PDO can use `lucamanunza\extpdo` with minimal changes for the most part.
 
-Added or changed functionality in `tebe\pdo` over the native PDO includes:
+Added or changed functionality in `lucamanunza\extpdo` over the native PDO includes:
 
-- Exceptions by default. `tebe\pdo` starts in the ERRMODE_EXCEPTION mode for error reporting instead of the ERRMODE_SILENT mode.
+- Exceptions by default. `lucamanunza\extpdo` starts in the ERRMODE_EXCEPTION mode for error reporting instead of the ERRMODE_SILENT mode.
 - New `PDO::run()` method. This is for convenience to prepare and execute an SQL statement in one step.
 - Bind array of values to placeholder in `PDO::run()` method. Placeholders that represent array values will be replaced with comma-separated quoted values. This means you can bind an array of values to a placeholder used with an IN (...) condition.
 - Array quoting. The `PDO::quote()` method will accept an array as input, and return a string of comma-separated quoted values.
@@ -23,7 +20,7 @@ Added or changed functionality in `tebe\pdo` over the native PDO includes:
 Create a PDO instance representing a connection to a database.
 
 ```php
-use tebe\pdo\PDO;
+use lucamanunza\extpdo\PDO;
 $db = new PDO('sqlite:database.sqlite');
 ```
 
@@ -84,27 +81,27 @@ print $db->quote(['red', 'green', 'yellow']);
 
 ## Installation and Autoloading
 
-This package is installable and PSR-4 autoloadable via Composer as `tebe/pdo`.
+This package is installable and PSR-4 autoloadable via Composer as `lucamanunza/extpdo`.
 
 Alternatively, download a release, or clone this repository, then include the classes manually:
 
 ```php
-include '{path/to/tebe/pdo}/src/PDO.php';
-include '{path/to/tebe/pdo}/src/PDOStatement.php';
-include '{path/to/tebe/pdo}/src/PDOParser.php';
+include '{path/to/lucamanunza/extpdo}/src/PDO.php';
+include '{path/to/lucamanunza/extpdo}/src/PDOStatement.php';
+include '{path/to/lucamanunza/extpdo}/src/PDOParser.php';
 ```
 
 ## Dependencies
 
-This package requires PHP 8.1 or later; it has been tested on latest Linux, macOS and Windows on PHP 8.1-8.4. We recommend using the latest available version of PHP as a matter of principle. `tebe\pdo` doesn't depend on other external packages.
+This package requires PHP 8.1 or later; it has been tested on latest Linux, macOS and Windows on PHP 8.1-8.4. We recommend using the latest available version of PHP as a matter of principle. `lucamanunza/extpdo` doesn't depend on other external packages.
 
 ## Documentation
 
-### tebe\pdo\PDO
+### lucamanunza\extpdo\PDO
 
-The class `tebe\pdo\PDO` is a wrapper for the native `PDO` class and implements all methods of this class. 
+The class `lucamanunza\extpdo\PDO` is a wrapper for the native `PDO` class and implements all methods of this class. 
 
-The main differences are that some methods return `tebe\pdo\PDOStatement` instances and the `quote` method can also handle arrays.
+The main differences are that some methods return `lucamanunza\extpdo\PDOStatement` instances and the `quote` method can also handle arrays.
 
 In addition, the class contains a new method `run`, which executes a query with bound values and returns the resulting statement instance.
 
@@ -120,7 +117,7 @@ public PDO::getWrappedPdo(): \PDO
 
 Prepares a statement for execution and returns a statement object.
 
-This differs from `PDO::prepare` in that it will return a `tebe\pdo\PDOStatement` object.
+This differs from `PDO::prepare` in that it will return a `lucamanunza\extpdo\PDOStatement` object.
 
 ```php
 public PDO::prepare(string $query, array $options = []): PDOStatement|false
@@ -132,7 +129,7 @@ See [php.net](https://php.net/pdo.prepare)
 
 Prepares and executes an SQL statement without placeholders.
 
-This differs from `PDO::query` in that it will return a `tebe\pdo\PDOStatement` object.
+This differs from `PDO::query` in that it will return a `lucamanunza\extpdo\PDOStatement` object.
 
 ```php
 public PDO::query(string $query, mixed ...$fetchModeArgs): PDOStatement|false
@@ -154,7 +151,7 @@ See [php.net](https://php.net/pdo.quote)
 
 #### run
 
-Runs a query with bound values and returns the resulting `tebe\pdo\PDOStatement`. 
+Runs a query with bound values and returns the resulting `lucamanunza\extpdo\PDOStatement`. 
 
 Array values will be processed by the parser instance and placeholders are replaced.
 
@@ -164,7 +161,7 @@ public PDO::run(string $sql, ?array $args = null): PDOStatement|false
 
 ---
 
-The remaining `tebe\pdo\PDO` methods are simple wrapper methods of the underlying `PDO` class.
+The remaining `lucamanunza\extpdo\PDO` methods are simple wrapper methods of the underlying `PDO` class.
 For more information, see [php.net](https://php.net/pdo).
 
 - [beginTransaction](https://php.net/pdo.beginTransaction)
@@ -180,9 +177,9 @@ For more information, see [php.net](https://php.net/pdo).
 - [rollBack](https://php.net/pdo.rollBack)
 - [setAttribute](https://php.net/pdo.setAttribute)
 
-### tebe\pdo\PDOStatement
+### lucamanunza\extpdo\PDOStatement
 
-The class `tebe\pdo\PDOStatement` is a wrapper for the native `PDOStatement` class and implements all methods of this class. 
+The class `lucamanunza\extpdo\PDOStatement` is a wrapper for the native `PDOStatement` class and implements all methods of this class. 
 
 The main difference is that the `execute` method returns a statement instance. This was done to allow method chaining aka fluent interface.
 
@@ -190,7 +187,7 @@ Besides that it contains several new `fetch*()` and `fetchAll*()` methodes for c
 
 #### __construct
 
-Creates a `tebe\pdo\PDOStatement` instance representing a query statement and wraps the original `PDOStatement`.
+Creates a `lucamanunza\extpdo\PDOStatement` instance representing a query statement and wraps the original `PDOStatement`.
 
 ```php
 public PDOStatement::__construct(\PDOStatement $stmt)
@@ -200,7 +197,7 @@ public PDOStatement::__construct(\PDOStatement $stmt)
 
 Executes a prepared statement
 
-This differs from `PDOStatement::execute` in that it will return a `tebe\pdo\PDOStatement` object.
+This differs from `PDOStatement::execute` in that it will return a `lucamanunza\extpdo\PDOStatement` object.
 
 ```php
 public PDOStatement::execute(?array $params = null): PDOStatement|false
@@ -349,7 +346,7 @@ public PDOStatement::fetchAllUnique(int $style = 0): array
 
 ---
 
-The remaining `tebe\pdo\PDOStatement` methods are simple wrapper methods of the underlying `PDOStatement` class.
+The remaining `lucamanunza\extpdo\PDOStatement` methods are simple wrapper methods of the underlying `PDOStatement` class.
 For more information, see [php.net](https://php.net/pdostatement).
 
 - [bindColumn](https://php.net/pdostatement.bindcolumn)
@@ -374,11 +371,11 @@ For more information, see [php.net](https://php.net/pdostatement).
 
 ### tebe\pdo\PDOParser
 
-Class `tebe\pdo\PDOParser` offers parsing and rebuilding functions for all drivers.
+Class `lucamanunza\extpdo\PDOParser` offers parsing and rebuilding functions for all drivers.
 
 #### __construct
 
-Creates a `tebe\pdo\PDOParser` instance.
+Creates a `lucamanunza\extpdo\PDOParser` instance.
 
 ```php
 public PDOParser::__construct(string $driver)
@@ -393,8 +390,6 @@ public PDOParser::rebuild(string $statement, array $values = []): array
 ```
 
 ## Quality
-
-[![Testing tebe\pdo](https://github.com/tbreuss/pdo/actions/workflows/tests.yml/badge.svg)](https://github.com/tbreuss/pdo/actions/workflows/tests.yml)
 
 This project adheres to [Semantic Versioning](https://semver.org/).
 
